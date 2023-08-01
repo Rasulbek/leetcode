@@ -17,4 +17,32 @@ class SubarraySumK {
         }
         return answer
     }
+
+    fun minSubArrayLen(target: Int, nums: IntArray): Int {
+        nums.sortDescending()
+        var tmp = 0
+        var i = 0
+        var j = 0
+        var cnt = 0
+        var found = false
+        var min = nums.size
+        while (j < nums.size) {
+            i = j
+            tmp=0
+            cnt = 0
+            while (i < nums.size) {
+                tmp += nums[i]
+                cnt++
+                if (tmp >= target) {
+                    found = true
+                    if (cnt < min) min = cnt
+                    break
+                }
+                i++
+            }
+            j++
+        }
+
+        return if (found) min else 0
+    }
 }
